@@ -260,6 +260,8 @@ class SessionRedirectMixin(object):
         url = prepared_request.url
 
         if 'Authorization' in headers and self.should_strip_auth(response.request.url, url):
+            self.do_nothing_1()
+
             # If we get redirected to a new host, we should strip out any
             # authentication headers.
             del headers['Authorization']
@@ -269,6 +271,8 @@ class SessionRedirectMixin(object):
         if new_auth is not None:
             prepared_request.prepare_auth(new_auth)
 
+    def do_nothing_1(self):
+        pass
 
     def rebuild_proxies(self, prepared_request, proxies):
         """This method re-evaluates the proxy configuration by considering the
@@ -506,7 +510,7 @@ class Session(SessionRedirectMixin):
             ``False``, requests will accept any TLS certificate presented by
             the server, and will ignore hostname mismatches and/or expired
             certificates, which will make your application vulnerable to
-            man-in-the-middle (MitM) attacks. Setting verify to ``False`` 
+            man-in-the-middle (MitM) attacks. Setting verify to ``False``
             may be useful during local development or testing.
         :param cert: (optional) if String, path to ssl client cert file (.pem).
             If Tuple, ('cert', 'key') pair.
