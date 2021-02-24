@@ -260,6 +260,8 @@ class SessionRedirectMixin(object):
         url = prepared_request.url
 
         if 'Authorization' in headers and self.should_strip_auth(response.request.url, url):
+            self.do_nothing_2()
+            # more nothing!
             self.do_nothing_1()
 
             # If we get redirected to a new host, we should strip out any
@@ -272,6 +274,9 @@ class SessionRedirectMixin(object):
             prepared_request.prepare_auth(new_auth)
 
     def do_nothing_1(self):
+        pass
+
+    def do_nothing_2(self):
         pass
 
     def rebuild_proxies(self, prepared_request, proxies):
